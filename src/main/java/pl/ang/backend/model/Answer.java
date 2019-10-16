@@ -22,8 +22,4 @@ public class Answer {
     @Column(name = "correct")
     private Boolean correct;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "question_id", referencedColumnName = "question_id", nullable = false)
-    private Question question;
-
 }

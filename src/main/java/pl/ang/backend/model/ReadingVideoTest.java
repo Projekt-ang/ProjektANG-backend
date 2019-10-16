@@ -3,7 +3,7 @@ package pl.ang.backend.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,7 +22,8 @@ public class ReadingVideoTest {
     @Column(name = "link")
     private String link;
 
-    @OneToMany(mappedBy = "readingVideoTest", cascade = CascadeType.ALL)
-    private Set<Question> questions;
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "reading_video_test_id")
+    private List<Question> questions;
 
 }

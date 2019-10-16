@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import pl.ang.backend.model.ReadingVideoTest;
 import pl.ang.backend.repository.ReadingVideoTestRepository;
 
+import java.util.Optional;
+
 @Service
 public class ReadingVideoTestServiceImpl {
 
@@ -13,11 +15,21 @@ public class ReadingVideoTestServiceImpl {
     private ReadingVideoTestRepository readingVideoTestRepository;
 
     public ResponseEntity<?> save(ReadingVideoTest readingVideoTest){
-        readingVideoTest.getQuestions().forEach(x -> {
-            x.setReadingVideoTest(readingVideoTest);
-            x.getAnswers().forEach(y -> y.setQuestion(x));
-        });
-        return ResponseEntity.ok(readingVideoTestRepository.save(readingVideoTest));
+        readingVideoTestRepository.save(readingVideoTest);
+        return ResponseEntity.ok(readingVideoTest);
+    }
+
+    public void delete(Long id){
+        readingVideoTestRepository.deleteById(id);
+    }
+
+    public ResponseEntity<?> edit(ReadingVideoTest readingVideoTest, Long id){
+        Optional<ReadingVideoTest> readingVideoTestOptional = readingVideoTestRepository.findById(id);
+        if (!readingVideoTestOptional.isPresent())
+            return ResponseEntity.notFound().build();
+        readingVideoTest.setId(id);
+        readingVideoTestRepository.save(readingVideoTest);
+        return ResponseEntity.noContent().build();
     }
 
 }

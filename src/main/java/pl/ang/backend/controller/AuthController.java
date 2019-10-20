@@ -19,6 +19,8 @@ import pl.ang.backend.model.JwtResponse;
 import pl.ang.backend.model.User;
 import pl.ang.backend.service.UserDetailsServiceImpl;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 public class AuthController {
@@ -46,8 +48,14 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
-    public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
+    public ResponseEntity<?> registerSingle(@RequestBody User user) throws Exception {
         return ResponseEntity.ok(userDetailsService.save(user));
+    }
+
+    @RequestMapping(value = "/api/massRegister", method = RequestMethod.POST)
+    public ResponseEntity<?> registerList(@RequestBody List<User> users) throws Exception {
+
+        return ResponseEntity.ok(userDetailsService.saveAll(users));
     }
 
     private void authenticate(String username, String password) throws Exception {

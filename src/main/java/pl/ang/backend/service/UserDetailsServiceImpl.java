@@ -53,4 +53,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return userRepository.save(user);
     }
+
+    public List<User> saveAll(List<User> users) {
+        for(User user : users) {
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findByName("USER"));
+            user.setRoles(roles);
+            user.setPassword(bCryptEncoder.encode(user.getUsername()+"123")); //kiedys jakis super wzor na haslo sie wymysli
+        }
+
+        return userRepository.saveAll(users);
+    }
 }

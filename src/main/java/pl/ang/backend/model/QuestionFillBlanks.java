@@ -21,7 +21,7 @@ public class QuestionFillBlanks {
     private String preblank;
     
     @NotNull
-    @Column(name = "blankspace", nullable = false)
+    @Column(name = "blankspace")
     private String blankspace;
     
     @Column(name = "postblank", nullable = true)

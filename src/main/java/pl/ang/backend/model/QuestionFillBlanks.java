@@ -17,12 +17,13 @@ public class QuestionFillBlanks {
     @Column(name = "question_id")
     private Long id;
 
-    @Column(name = "preblank")
+    @Column(name = "preblank", nullable = true)
     private String preblank;
     
-    @Column(name = "blankspace")
+    @NotNull
+    @Column(name = "blankspace", nullable = false)
     private String blankspace;
     
-    @Column(name = "postblank")
+    @Column(name = "postblank", nullable = true)
     private String postblank;
 }

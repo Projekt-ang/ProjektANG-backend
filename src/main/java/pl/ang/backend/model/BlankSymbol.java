@@ -18,7 +18,7 @@ public class BlankSymbol {
     private Long id;
 
     @Column(name = "symbol_index")
-    private int index;
+    private Integer index;
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "blank_symbol_id")

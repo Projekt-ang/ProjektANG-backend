@@ -24,7 +24,7 @@ public class BlankInsertTestServiceImpl {
     }
 
     public ResponseEntity<?> edit(BlankInsertTest blankInsertTest, Long id){
-        Optional<BlankInsert> blankInsertTestOptional = blankInsertTestRepository.findById(id);
+        Optional<BlankInsertTest> blankInsertTestOptional = blankInsertTestRepository.findById(id);
         if (!blankInsertTestOptional.isPresent())
             return ResponseEntity.notFound().build();
         blankInsertTest.setId(id);
@@ -33,3 +33,4 @@ public class BlankInsertTestServiceImpl {
     }
 
 }
+

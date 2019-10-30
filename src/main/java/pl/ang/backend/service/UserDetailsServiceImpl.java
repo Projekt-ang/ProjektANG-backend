@@ -41,8 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 
     public User save(User user) {
@@ -59,7 +58,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("USER"));
             user.setRoles(roles);
-            user.setPassword(bCryptEncoder.encode(user.getUsername()+"123")); //kiedys jakis super wzor na haslo sie wymysli
+            user.setUsername(bCryptEncoder.encode((user.getFirstName().charAt(0) + user.getLastName()).toLowerCase()));
+            user.setPassword(bCryptEncoder.encode((user.getFirstName().charAt(0) + user.getLastName()).toLowerCase())); //dodamy jakis random number, na razie dla ulatwienia zostawiam taki jak login
         }
 
         return userRepository.saveAll(users);

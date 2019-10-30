@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,8 +17,11 @@ public class ReadingVideoTest {
     @Column(name = "reading_video_test_id")
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text", length = 5000)
     private String text;
+
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "link")
     private String link;
@@ -25,5 +29,9 @@ public class ReadingVideoTest {
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "reading_video_test_id")
     private List<Question> questions;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "reading_video_test_tag", joinColumns = @JoinColumn(name = "reading_video_test_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tags;
 
 }

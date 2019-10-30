@@ -17,7 +17,7 @@ public class BlankSymbol {
     @Column(name = "blank_symbol_id")
     private Long id;
 
-    @Column(name = "symbol_index")
+    @Column(name = "index")
     private Integer index;
 
     @OneToMany(cascade = {CascadeType.ALL})

@@ -1,10 +1,9 @@
 
 {
     
-     "text" : "dfsfsd{0}gjhdfghdfgh{1}rgdrgrg",
-      "blank_symbols" : [
+      "text" : "dfsfsd{0}gjhdfghdfgh{1}rgdrgrg",
+      "blankSymbols" : [
       {
-          "index": 1,
           "answers": [
           {
              "answer": "ewrewrew",
@@ -17,7 +16,6 @@
           ] 
       },
       {
-          "index": 2,
           "answers": [
           {
              "answer": "fsfsdfsdf",

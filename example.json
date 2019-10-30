@@ -2,10 +2,10 @@
 {
     
      "text" : "dfsfsd{0}gjhdfghdfgh{1}rgdrgrg",
-      "BlankSymbols" : [
+      "blank_symbols" : [
       {
           "index": 1,
-          "Answers": [
+          "answers": [
           {
              "answer": "ewrewrew",
              "correct" : true
@@ -18,7 +18,7 @@
       },
       {
           "index": 2,
-          "Answers": [
+          "answers": [
           {
              "answer": "fsfsdfsdf",
              "correct" : false

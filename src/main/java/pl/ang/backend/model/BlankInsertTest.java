@@ -21,6 +21,6 @@ public class BlankInsertTest {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "blank_insert_test_id")
-    private List<BlankSymbol> blank_symbols;
+    private List<BlankSymbol> blankSymbols;
 
 }

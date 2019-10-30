@@ -1,36 +1,34 @@
 
 {
-    "BlankInsertTest" : [
-    {
-              "text" : "dfsfsd{0}gjhdfghdfgh{1}rgdrgrg",
-              "BlankSymbols" : [
-              {
-                  "index": 1,
-                  "Answers": [
-                  {
-                    "answer": "ewrewrew",
-                    "correct" : true
-                  },
-                  {
-                    "answer": "aaaaaaa",
-                    "correct" : false
-                  }
-                  ] 
-               },
-               {
-                  "index": 2,
-                  "Answers": [
-                  {
-                    "answer": "fsfsdfsdf",
-                    "correct" : false
-                  },
-                  {
-                    "answer": "bbbbbbb",
-                    "correct" : true
-                  }
-                  ] 
-               }
-               ] 
-    }
-    ]
+    
+     "text" : "dfsfsd{0}gjhdfghdfgh{1}rgdrgrg",
+      "BlankSymbols" : [
+      {
+          "index": 1,
+          "Answers": [
+          {
+             "answer": "ewrewrew",
+             "correct" : true
+          },
+          {
+             "answer": "aaaaaaa",
+             "correct" : false
+          }
+          ] 
+      },
+      {
+          "index": 2,
+          "Answers": [
+          {
+             "answer": "fsfsdfsdf",
+             "correct" : false
+          },
+          {
+             "answer": "bbbbbbb",
+             "correct" : true
+          }
+          ] 
+      }
+      ] 
+   
 }      

@@ -17,7 +17,7 @@ public class Question {
     @Column(name = "question_id")
     private Long id;
 
-    @Column(name = "question")
+    @Column(name = "question", length = 2047)
     private String question;
 
     @OneToMany(cascade = {CascadeType.ALL})

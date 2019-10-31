@@ -16,7 +16,7 @@ public class Answer {
     @Column(name = "answer_id")
     private Long id;
 
-    @Column(name = "answer")
+    @Column(name = "answer", length = 1023)
     private String answer;
 
     @Column(name = "correct")

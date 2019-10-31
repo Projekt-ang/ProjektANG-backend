@@ -20,10 +20,13 @@ public class ReadingVideoTest {
     @Column(name = "text", length = 5000)
     private String text;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 2047)
     private String name;
 
-    @Column(name = "link")
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "link", length = 2047)
     private String link;
 
     @OneToMany(cascade = {CascadeType.ALL})
@@ -33,5 +36,4 @@ public class ReadingVideoTest {
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "reading_video_test_tag", joinColumns = @JoinColumn(name = "reading_video_test_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
-
 }

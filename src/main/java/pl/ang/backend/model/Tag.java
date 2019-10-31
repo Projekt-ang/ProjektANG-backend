@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "tag")
+@Table(name = "Tag")
 public class Tag {
 
     @Id
@@ -18,7 +18,7 @@ public class Tag {
     @Column(name = "tag_id")
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text", length = 2047)
     private String text;
 
     @JsonIgnore

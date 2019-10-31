@@ -16,7 +16,7 @@ public class UsageExample {
     @Column(name = "usage_example_id")
     private Long id;
 
-    @Column(name = "sentence")
+    @Column(name = "sentence", length = 2047)
     private String sentence;
 
 }

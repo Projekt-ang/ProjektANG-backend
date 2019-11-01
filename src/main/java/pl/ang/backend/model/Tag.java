@@ -5,23 +5,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "Role")
-public class Role {
+@Table(name = "Tag")
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "role_id")
+    @Column(name = "tag_id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "text", length = 2047)
+    private String text;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @ManyToMany(mappedBy = "tags")
+    private List<ReadingVideoTest> tests;
 }

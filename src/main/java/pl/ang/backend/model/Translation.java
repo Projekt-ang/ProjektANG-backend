@@ -8,18 +8,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "Answer")
-public class Answer {
+@Table(name = "Translation")
+public class Translation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "answer_id")
+    @Column(name = "translation_id")
     private Long id;
 
-    @Column(name = "answer", length = 1023)
-    private String answer;
-
-    @Column(name = "correct")
-    private Boolean correct;
+    @Column(name = "word")
+    private String word;
 
 }

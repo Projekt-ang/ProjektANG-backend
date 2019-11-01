@@ -17,7 +17,7 @@ public class ReadingVideoTest {
     @Column(name = "reading_video_test_id")
     private Long id;
 
-    @Column(name = "text", length = 5000)
+    @Column(name = "text", length = 12000)
     private String text;
 
     @Column(name = "name", length = 2047)

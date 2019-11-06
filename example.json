@@ -1,0 +1,32 @@
+
+{
+    
+      "text" : "dfsfsd{0}gjhdfghdfgh{1}rgdrgrg",
+      "blankSymbols" : [
+      {
+          "answers": [
+          {
+             "answer": "ewrewrew",
+             "correct" : true
+          },
+          {
+             "answer": "aaaaaaa",
+             "correct" : false
+          }
+          ] 
+      },
+      {
+          "answers": [
+          {
+             "answer": "fsfsdfsdf",
+             "correct" : false
+          },
+          {
+             "answer": "bbbbbbb",
+             "correct" : true
+          }
+          ] 
+      }
+      ] 
+   
+}      

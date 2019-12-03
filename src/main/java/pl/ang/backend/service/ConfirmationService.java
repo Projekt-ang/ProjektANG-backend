@@ -40,7 +40,7 @@ public class ConfirmationService {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(email);
             mailMessage.setSubject("Potwierdzenie maila");
-            mailMessage.setFrom("mail.projektang@gmail.com");
+            mailMessage.setFrom("projektang.ug@wp.pl");
             mailMessage.setText("localhost:8080/verify/" + confirmationToken.getToken());
             emailSenderService.sendEmail(mailMessage);
             return ResponseEntity.ok().build();

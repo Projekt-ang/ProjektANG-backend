@@ -30,7 +30,7 @@ public class TestController {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo("kjmasa2@gmail.com");
         mailMessage.setSubject("TEST MAILA");
-        mailMessage.setFrom("mail.projektang@gmail.com");
+        mailMessage.setFrom("projektang.ug@wp.pl");
         mailMessage.setText("Testowy mail z kontrolera");
 
         emailSenderService.sendEmail(mailMessage);

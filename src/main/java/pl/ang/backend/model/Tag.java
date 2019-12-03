@@ -24,4 +24,8 @@ public class Tag {
     @JsonIgnore
     @ManyToMany(mappedBy = "tags")
     private List<ReadingVideoTest> tests;
+    
+    @JsonIgnore
+    @ManyToMany(mappedBy = "tags")
+    private List<BlankInsertTest> blankTests;
 }

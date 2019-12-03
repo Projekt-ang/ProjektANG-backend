@@ -46,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public User save(User user) {
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findByName("USER"));
+        roles.add(roleRepository.findByName("UNCONFIRMED"));
         user.setRoles(roles);
         user.setPassword(bCryptEncoder.encode(user.getPassword()));
 
@@ -56,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public List<User> saveAll(List<User> users) {
         for(User user : users) {
             Set<Role> roles = new HashSet<>();
-            roles.add(roleRepository.findByName("USER"));
+            roles.add(roleRepository.findByName("UNCONFIRMED"));
             user.setRoles(roles);
             user.setUsername(bCryptEncoder.encode((user.getFirstName().charAt(0) + user.getLastName()).toLowerCase()));
             user.setPassword(bCryptEncoder.encode((user.getFirstName().charAt(0) + user.getLastName()).toLowerCase())); //dodamy jakis random number, na razie dla ulatwienia zostawiam taki jak login

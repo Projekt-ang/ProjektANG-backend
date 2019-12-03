@@ -7,4 +7,5 @@ import pl.ang.backend.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(@Param("username") String username);
+    User findByEmail(@Param("email") String email);
 }

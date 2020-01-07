@@ -50,5 +50,14 @@ public class BlankInsertTestServiceImpl {
         return ResponseEntity.noContent().build();
     }
 
+    public ResponseEntity<?> getAll(){
+        List<BlankInsertTest> readingVideoTests = blankInsertTestRepository.findAll();
+        return ResponseEntity.ok(readingVideoTests);
+    }
+
+    public ResponseEntity<?> getById(Long id){
+        return ResponseEntity.ok(blankInsertTestRepository.findById(id));
+    }
+
 }
 

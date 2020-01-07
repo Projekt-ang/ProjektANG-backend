@@ -32,4 +32,14 @@ public class BlankInsertController {
         return ResponseEntity.ok(blankInsertTestService.shareBlankInsertTest(testId, roleIds));
     }
 
+    @RequestMapping(value = "/api/BlankInsertTests", method = RequestMethod.GET)
+    public ResponseEntity<?> getReadingVideoTest() {
+        return ResponseEntity.ok(blankInsertTestService.getAll());
+    }
+
+    @RequestMapping(value = "/api/BlankInsertTest/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getReadingVideoTestById(@PathVariable long id) {
+        return ResponseEntity.ok(blankInsertTestService.getById(id));
+    }
+
 }

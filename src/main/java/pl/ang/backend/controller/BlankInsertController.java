@@ -27,4 +27,9 @@ public class BlankInsertController {
         return ResponseEntity.ok(blankInsertTestService.edit(blankInsertTest, id));
     }
 
+    @RequestMapping(value = "/api/BlankInsertTestShare/{testId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> shareBlankInsertTest(@RequestBody Long[] roleIds, @PathVariable long testId) {
+        return ResponseEntity.ok(blankInsertTestService.shareBlankInsertTest(testId, roleIds));
+    }
+
 }

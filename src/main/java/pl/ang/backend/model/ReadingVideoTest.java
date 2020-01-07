@@ -36,4 +36,9 @@ public class ReadingVideoTest {
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "reading_video_test_tag", joinColumns = @JoinColumn(name = "reading_video_test_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "reading_video_test_role", joinColumns = @JoinColumn(name = "reading_video_test_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
+
 }

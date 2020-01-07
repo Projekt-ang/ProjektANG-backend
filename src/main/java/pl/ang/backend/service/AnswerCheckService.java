@@ -28,14 +28,20 @@ public class AnswerCheckService {
             }
         }
         List<Long> correctIds = new ArrayList<>();
+        List<Long> correctQuestionId = new ArrayList<>();
         if(!answers.isEmpty()){
             correctAnswers = answers.stream().filter(x -> x.getCorrect()).collect(Collectors.toList());
             if(!correctAnswers.isEmpty()){
-                correctAnswers.forEach(x -> correctIds.add(x.getId()));
+                correctAnswers.forEach(x -> {
+                    correctIds.add(x.getId());
+                    correctQuestionId.add(answerRepository.findQuestionIdByAnswerIdNative(x.getId()));
+                });
             }
         }
         Long[] correctIdsArray = new Long[correctAnswers.size()];
+        Long[] correctQuestionIdsArray = new Long[correctQuestionId.size()];
         map.put("correctAnswerIds", correctIds.toArray(correctIdsArray));
+        map.put("correctQuestionIds", correctQuestionId.toArray(correctQuestionIdsArray));
         map.put("score", correctAnswers.size());
         map.put("maxScore", answers.size());
         return map;

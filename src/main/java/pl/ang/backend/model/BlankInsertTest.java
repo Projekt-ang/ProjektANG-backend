@@ -32,4 +32,8 @@ public class BlankInsertTest {
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "blank_insert_test_tag", joinColumns = @JoinColumn(name = "blank_insert_test_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "blank_insert_test_role", joinColumns = @JoinColumn(name = "blank_insert_test_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 }

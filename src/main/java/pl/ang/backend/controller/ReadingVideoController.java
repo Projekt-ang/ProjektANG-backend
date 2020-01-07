@@ -27,4 +27,19 @@ public class ReadingVideoController {
         return ResponseEntity.ok(readingVideoTestService.edit(readingVideoTest, id));
     }
 
+    @RequestMapping(value = "/api/readingVideoTestShare/{testId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> shareReadingVideoTest(@RequestBody Long[] roleIds, @PathVariable long testId) {
+        return ResponseEntity.ok(readingVideoTestService.shareReadingVideoTest(testId, roleIds));
+    }
+
+    @RequestMapping(value = "/api/readingVideoTests", method = RequestMethod.GET)
+    public ResponseEntity<?> getReadingVideoTest() {
+        return ResponseEntity.ok(readingVideoTestService.getAll());
+    }
+
+    @RequestMapping(value = "/api/readingVideoTest/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getReadingVideoTestById(@PathVariable long id) {
+        return ResponseEntity.ok(readingVideoTestService.getById(id));
+    }
+
 }

@@ -3,6 +3,7 @@ package pl.ang.backend.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -34,4 +35,8 @@ public class User {
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @OneToMany(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "user_id")
+    private List<Result> results;
 }

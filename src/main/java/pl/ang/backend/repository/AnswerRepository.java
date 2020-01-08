@@ -10,4 +10,8 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
             nativeQuery = true)
     Long findQuestionIdByAnswerIdNative(
             @Param("id") Long id);
+    @Query(value = "SELECT blank_symbol_id FROM answer a WHERE a.answer_id = :id",
+            nativeQuery = true)
+    Long findBlankByAnswerIdNative(
+            @Param("id") Long id);
 }

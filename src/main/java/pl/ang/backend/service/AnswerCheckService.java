@@ -3,8 +3,15 @@ package pl.ang.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.ang.backend.model.Answer;
+import pl.ang.backend.model.ReadingVideoTest;
+import pl.ang.backend.model.Result;
+import pl.ang.backend.model.User;
 import pl.ang.backend.repository.AnswerRepository;
+import pl.ang.backend.repository.ReadingVideoTestRepository;
+import pl.ang.backend.repository.ResultRepository;
+import pl.ang.backend.repository.UserRepository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,13 +23,22 @@ public class AnswerCheckService {
 
     @Autowired
     private AnswerRepository answerRepository;
+    @Autowired
+    private ResultRepository resultRepository;
+    @Autowired
+    private ReadingVideoTestRepository readingVideoTestRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    public Map<String,Object> checkAnswers(Long[] ids){
+    public Map<String,Object> checkAnswers(Map<String,Object> body){
+        List<Integer> ids = (ArrayList) body.get("answerIds");
+        Integer userid = (Integer) body.get("userId");
+        Integer testId = (Integer) body.get("testId");
         Map<String,Object> map = new HashMap<>();
         List<Answer> answers = new ArrayList<>();
         List<Answer> correctAnswers = new ArrayList<>();
-        for (Long id : ids) {
-            Answer answer = answerRepository.findById(id).orElse(null);
+        for (Integer id : ids) {
+            Answer answer = answerRepository.findById(id.longValue()).orElse(null);
             if(answer != null){
                 answers.add(answer);
             }
@@ -34,7 +50,16 @@ public class AnswerCheckService {
             if(!correctAnswers.isEmpty()){
                 correctAnswers.forEach(x -> {
                     correctIds.add(x.getId());
-                    correctQuestionId.add(answerRepository.findQuestionIdByAnswerIdNative(x.getId()));
+                    Long questionId = answerRepository.findQuestionIdByAnswerIdNative(x.getId());
+                    if(questionId != null){
+                        correctQuestionId.add(questionId);
+
+                    }
+                    Long blankId = answerRepository.findBlankByAnswerIdNative(x.getId());
+                    if(blankId != null){
+                        correctQuestionId.add(blankId);
+
+                    }
                 });
             }
         }
@@ -44,6 +69,18 @@ public class AnswerCheckService {
         map.put("correctQuestionIds", correctQuestionId.toArray(correctQuestionIdsArray));
         map.put("score", correctAnswers.size());
         map.put("maxScore", answers.size());
+
+        Result result = new Result();
+        Integer points = correctQuestionId.size();
+        Integer maxPoints = answers.size();
+        float divide = (points / (float) maxPoints)*100;
+        int percentage = Math.round(divide);
+        result.setPoints(points.longValue());
+        result.setMaxPoints(maxPoints.longValue());
+        result.setPercentage(percentage);
+        result.setUser(userRepository.findById(userid.longValue()).orElse(null));
+        result.setReadingVideoTest(readingVideoTestRepository.findById(testId.longValue()).orElse(null));
+        resultRepository.save(result);
         return map;
     }
 }

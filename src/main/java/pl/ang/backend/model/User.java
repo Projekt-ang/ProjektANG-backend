@@ -1,5 +1,6 @@
 package pl.ang.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,6 +37,7 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @JsonIgnore
     @OneToMany(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "user_id")
     private List<Result> results;

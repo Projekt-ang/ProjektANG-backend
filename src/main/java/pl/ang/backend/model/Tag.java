@@ -28,4 +28,8 @@ public class Tag {
     @JsonIgnore
     @ManyToMany(mappedBy = "tags")
     private List<BlankInsertTest> blankTests;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "tags")
+    private List<Sentence> sentences;
 }

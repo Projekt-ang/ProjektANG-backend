@@ -14,7 +14,7 @@ public class AnswerCheckController {
     private AnswerCheckService answerCheckService;
 
     @RequestMapping(value = "/api/check-answers", method = RequestMethod.POST)
-    public Map<String,Object> checkAnswers(@RequestBody Long[] ids) {
-        return answerCheckService.checkAnswers(ids);
+    public Map<String,Object> checkAnswers(@RequestBody Map<String,Object> body) {
+        return answerCheckService.checkAnswers(body);
     }
 }

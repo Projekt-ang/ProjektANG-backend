@@ -12,7 +12,7 @@ import java.util.List;
 public class BlankInsertTest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blank_insert_test_id")
     private Long id;
 

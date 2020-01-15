@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.ang.backend.model.ReadingVideoTest;
 import pl.ang.backend.service.ReadingVideoTestServiceImpl;
 
+import java.util.Map;
+
 @RestController
 public class ReadingVideoController {
 
@@ -40,6 +42,11 @@ public class ReadingVideoController {
     @RequestMapping(value = "/api/readingVideoTest/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getReadingVideoTestById(@PathVariable long id) {
         return ResponseEntity.ok(readingVideoTestService.getById(id));
+    }
+
+    @RequestMapping(value = "/api/readingVideoTestByName", method = RequestMethod.GET)
+    public ResponseEntity<?> getReadingVideoTestByName(@RequestBody Map<String,Object> body) {
+        return ResponseEntity.ok(readingVideoTestService.getByName(body));
     }
 
 }

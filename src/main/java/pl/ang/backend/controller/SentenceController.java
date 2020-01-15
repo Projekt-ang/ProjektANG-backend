@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.ang.backend.model.Sentence;
 import pl.ang.backend.service.SentenceService;
 
+import java.util.Map;
+
 @RestController
 public class SentenceController {
 
@@ -35,6 +37,11 @@ public class SentenceController {
     @RequestMapping(value = "/api/sentence/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getSentenceById(@PathVariable long id) {
         return ResponseEntity.ok(sentenceService.getById(id));
+    }
+
+    @RequestMapping(value = "/api/sentenceByPolishSentence", method = RequestMethod.GET)
+    public ResponseEntity<?> getSentenceByPolishSentence(@RequestBody Map<String,Object> body) {
+        return ResponseEntity.ok(sentenceService.getByPolishSentence(body));
     }
     
 }

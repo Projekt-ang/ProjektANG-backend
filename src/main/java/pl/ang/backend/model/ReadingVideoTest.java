@@ -13,7 +13,7 @@ import java.util.Set;
 public class ReadingVideoTest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reading_video_test_id")
     private Long id;
 

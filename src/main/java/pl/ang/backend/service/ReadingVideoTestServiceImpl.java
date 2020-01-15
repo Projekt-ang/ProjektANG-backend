@@ -8,10 +8,7 @@ import pl.ang.backend.model.Role;
 import pl.ang.backend.repository.ReadingVideoTestRepository;
 import pl.ang.backend.repository.RoleRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ReadingVideoTestServiceImpl {
@@ -57,6 +54,10 @@ public class ReadingVideoTestServiceImpl {
 
     public ResponseEntity<?> getById(Long id){
         return ResponseEntity.ok(readingVideoTestRepository.findById(id));
+    }
+
+    public ResponseEntity<?> getByName(Map<String, Object> body){
+        return ResponseEntity.ok(readingVideoTestRepository.findByName(body.get("name").toString()));
     }
 
 }

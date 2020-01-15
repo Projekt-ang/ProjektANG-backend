@@ -13,7 +13,7 @@ import java.util.List;
 public class BlankSymbol {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blank_symbol_id")
     private Long id;
 

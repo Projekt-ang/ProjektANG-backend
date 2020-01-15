@@ -8,10 +8,7 @@ import pl.ang.backend.model.Sentence;
 import pl.ang.backend.repository.RoleRepository;
 import pl.ang.backend.repository.SentenceRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class SentenceService {
@@ -46,6 +43,10 @@ public class SentenceService {
 
     public ResponseEntity<?> getById(Long id){
         return ResponseEntity.ok(sentenceRepository.findById(id));
+    }
+
+    public ResponseEntity<?> getByPolishSentence(Map<String,Object> body){
+        return ResponseEntity.ok(sentenceRepository.findByPolishSentence(body.get("polishSentence").toString()));
     }
     
 }

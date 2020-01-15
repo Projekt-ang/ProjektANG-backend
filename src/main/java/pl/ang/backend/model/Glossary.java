@@ -13,7 +13,7 @@ import java.util.List;
 public class Glossary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "glossary_id")
     private Long id;
 
@@ -30,5 +30,13 @@ public class Glossary {
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "glossary_id")
     private List<UsageExample> usageExamples;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "glossary_tag", joinColumns = @JoinColumn(name = "glossary_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tags;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "glossary_role", joinColumns = @JoinColumn(name = "glossary_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
 
 }

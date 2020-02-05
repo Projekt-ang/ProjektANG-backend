@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.ang.backend.model.BlankInsertTest;
 import pl.ang.backend.model.Role;
+import pl.ang.backend.model.Tag;
 import pl.ang.backend.repository.BlankInsertTestRepository;
 import pl.ang.backend.repository.RoleRepository;
+import pl.ang.backend.repository.TagRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +22,25 @@ public class BlankInsertTestServiceImpl {
     private BlankInsertTestRepository blankInsertTestRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
     public ResponseEntity<?> save(BlankInsertTest blankInsertTest){
+        List<Tag> tags = tagRepository.findAll();
+        if(!blankInsertTest.getTags().isEmpty()){
+            List<Tag> tagsToDelete = new ArrayList<>();
+            List<Tag> tagsToAdd = new ArrayList<>();
+            for (Tag tag : tags) {
+                for (Tag tag1 : blankInsertTest.getTags()) {
+                    if(tag.getText().toLowerCase().equals(tag1.getText().toLowerCase())){
+                        tagsToDelete.add(tag1);
+                        tagsToAdd.add(tag);
+                    }
+                }
+            }
+            blankInsertTest.getTags().removeAll(tagsToDelete);
+            blankInsertTest.getTags().addAll(tagsToAdd);
+        }
         blankInsertTestRepository.save(blankInsertTest);
         return ResponseEntity.ok(blankInsertTest);
     }

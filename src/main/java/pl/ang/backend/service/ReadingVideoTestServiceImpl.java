@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import pl.ang.backend.model.ReadingVideoTest;
 import pl.ang.backend.model.Role;
 import pl.ang.backend.model.Tag;
+import pl.ang.backend.model.User;
 import pl.ang.backend.repository.ReadingVideoTestRepository;
 import pl.ang.backend.repository.RoleRepository;
 import pl.ang.backend.repository.TagRepository;
+import pl.ang.backend.repository.UserRepository;
 
 import java.util.*;
 
@@ -21,6 +23,8 @@ public class ReadingVideoTestServiceImpl {
     private RoleRepository roleRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public ResponseEntity<?> save(ReadingVideoTest readingVideoTest){
         List<Tag> tags = tagRepository.findAll();
@@ -77,6 +81,15 @@ public class ReadingVideoTestServiceImpl {
 
     public ResponseEntity<?> getByName(Map<String, Object> body){
         return ResponseEntity.ok(readingVideoTestRepository.findByName(body.get("name").toString()));
+    }
+
+    public ResponseEntity<?> getByUserId(Long userId){
+        User user = userRepository.findById(userId).orElse(null);
+        if(user != null){
+            return ResponseEntity.ok(readingVideoTestRepository.findByRoles(user.getRoles()));
+        }
+        else
+            return ResponseEntity.ok(null);
     }
 
 }

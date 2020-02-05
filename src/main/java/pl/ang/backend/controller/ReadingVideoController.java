@@ -49,4 +49,8 @@ public class ReadingVideoController {
         return ResponseEntity.ok(readingVideoTestService.getByName(body));
     }
 
+    @RequestMapping(value = "/api/readingVideoTestsByUserId/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getReadingVideoTest(@PathVariable long userId) {
+        return ResponseEntity.ok(readingVideoTestService.getByUserId(userId));
+    }
 }

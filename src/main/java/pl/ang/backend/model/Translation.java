@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Translation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "translation_id")
     private Long id;
 

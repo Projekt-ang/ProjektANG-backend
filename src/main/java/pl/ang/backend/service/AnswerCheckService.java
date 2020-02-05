@@ -79,9 +79,9 @@ public class AnswerCheckService {
         result.setMaxPoints(maxPoints.longValue());
         result.setPercentage(percentage);
         result.setUser(userRepository.findById(userid.longValue()).orElse(null));
-        if(testId != null || testId.intValue() != 0){
+        if(testId != null && testId.intValue() != 0){
             result.setReadingVideoTest(readingVideoTestRepository.findById(testId.longValue()).orElse(null));
-        } else if(blankTestId != null || blankTestId.intValue() != 0) {
+        } else if(blankTestId != null && blankTestId.intValue() != 0) {
             result.setBlankInsertTest(blankInsertTestRepository.findById(blankTestId.longValue()).orElse(null));
         }
         resultRepository.save(result);

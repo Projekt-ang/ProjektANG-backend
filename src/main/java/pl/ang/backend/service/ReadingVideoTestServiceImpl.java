@@ -5,8 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.ang.backend.model.ReadingVideoTest;
 import pl.ang.backend.model.Role;
+import pl.ang.backend.model.Tag;
 import pl.ang.backend.repository.ReadingVideoTestRepository;
 import pl.ang.backend.repository.RoleRepository;
+import pl.ang.backend.repository.TagRepository;
 
 import java.util.*;
 
@@ -17,8 +19,25 @@ public class ReadingVideoTestServiceImpl {
     private ReadingVideoTestRepository readingVideoTestRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
     public ResponseEntity<?> save(ReadingVideoTest readingVideoTest){
+        List<Tag> tags = tagRepository.findAll();
+        if(!readingVideoTest.getTags().isEmpty()){
+            List<Tag> tagsToDelete = new ArrayList<>();
+            List<Tag> tagsToAdd = new ArrayList<>();
+            for (Tag tag : tags) {
+                for (Tag tag1 : readingVideoTest.getTags()) {
+                    if(tag.getText().toLowerCase().equals(tag1.getText().toLowerCase())){
+                        tagsToDelete.add(tag1);
+                        tagsToAdd.add(tag);
+                    }
+                }
+            }
+            readingVideoTest.getTags().removeAll(tagsToDelete);
+            readingVideoTest.getTags().addAll(tagsToAdd);
+        }
         readingVideoTestRepository.save(readingVideoTest);
         return ResponseEntity.ok(readingVideoTest);
     }

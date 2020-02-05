@@ -6,10 +6,7 @@ import pl.ang.backend.model.Answer;
 import pl.ang.backend.model.ReadingVideoTest;
 import pl.ang.backend.model.Result;
 import pl.ang.backend.model.User;
-import pl.ang.backend.repository.AnswerRepository;
-import pl.ang.backend.repository.ReadingVideoTestRepository;
-import pl.ang.backend.repository.ResultRepository;
-import pl.ang.backend.repository.UserRepository;
+import pl.ang.backend.repository.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,12 +25,15 @@ public class AnswerCheckService {
     @Autowired
     private ReadingVideoTestRepository readingVideoTestRepository;
     @Autowired
+    private BlankInsertTestRepository blankInsertTestRepository;
+    @Autowired
     private UserRepository userRepository;
 
     public Map<String,Object> checkAnswers(Map<String,Object> body){
         List<Integer> ids = (ArrayList) body.get("answerIds");
         Integer userid = (Integer) body.get("userId");
         Integer testId = (Integer) body.get("testId");
+        Integer blankTestId = (Integer) body.get("blankTestId");
         Map<String,Object> map = new HashMap<>();
         List<Answer> answers = new ArrayList<>();
         List<Answer> correctAnswers = new ArrayList<>();
@@ -79,7 +79,11 @@ public class AnswerCheckService {
         result.setMaxPoints(maxPoints.longValue());
         result.setPercentage(percentage);
         result.setUser(userRepository.findById(userid.longValue()).orElse(null));
-        result.setReadingVideoTest(readingVideoTestRepository.findById(testId.longValue()).orElse(null));
+        if(testId != null || testId.intValue() != 0){
+            result.setReadingVideoTest(readingVideoTestRepository.findById(testId.longValue()).orElse(null));
+        } else if(blankTestId != null || blankTestId.intValue() != 0) {
+            result.setBlankInsertTest(blankInsertTestRepository.findById(blankTestId.longValue()).orElse(null));
+        }
         resultRepository.save(result);
         return map;
     }

@@ -18,7 +18,7 @@ public class Tag {
     @Column(name = "tag_id")
     private Long id;
 
-    @Column(name = "text", length = 2047)
+    @Column(name = "text", length = 2047, unique = true)
     private String text;
 
     @JsonIgnore

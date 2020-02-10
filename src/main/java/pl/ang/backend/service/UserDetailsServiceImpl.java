@@ -1,5 +1,6 @@
 package pl.ang.backend.service;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,16 +68,47 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public List<User> saveAll(List<User> users) {
+    public Map<String, String> saveAll(List<User> users, String role) {
+        int passwordLength = 10;
+        int startChar = 'a';
+        int endChar = 'z';
+        Map<String, String> loginDetails = new HashMap<>();
+
+        Role group = roleRepository.findByName(role);
+        if(group == null){
+            group = new Role();
+            group.setName(role);
+            roleRepository.save(group);
+        }
+
         for(User user : users) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.findByName("UNCONFIRMED"));
+            roles.add(group);
             user.setRoles(roles);
-            user.setUsername(bCryptEncoder.encode((user.getFirstName().charAt(0) + user.getLastName()).toLowerCase()));
-            user.setPassword(bCryptEncoder.encode((user.getFirstName().charAt(0) + user.getLastName()).toLowerCase())); //dodamy jakis random number, na razie dla ulatwienia zostawiam taki jak login
+            String name = (user.getFirstName().charAt(0) + user.getLastName()).toLowerCase();
+            int size = userRepository.findByUsernameStartingWith(name).size();
+            if(size > 0) {
+                name = name + size;
+                user.setUsername(name);
+            }
+            else
+                user.setUsername(name);
+
+            SecureRandom random = new SecureRandom();
+
+            String generatedPassword = random.ints(startChar, endChar + 1)
+                .limit(passwordLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+            loginDetails.put(name, generatedPassword);
+
+            user.setPassword(bCryptEncoder.encode(generatedPassword));
+            userRepository.save(user);
         }
 
-        return userRepository.saveAll(users);
+        return loginDetails;
     }
 
     public ResponseEntity<?> passwordGenerateToken(String email){

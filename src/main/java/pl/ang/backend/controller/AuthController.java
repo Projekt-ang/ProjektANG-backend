@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.ang.backend.configuration.JwtTokenUtil;
 import pl.ang.backend.model.JwtRequest;
 import pl.ang.backend.model.JwtResponse;
+import pl.ang.backend.model.MassRegisterWrapper;
 import pl.ang.backend.model.User;
 import pl.ang.backend.service.UserDetailsServiceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -53,9 +55,8 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/api/massRegister", method = RequestMethod.POST)
-    public ResponseEntity<?> registerList(@RequestBody List<User> users) throws Exception {
-
-        return ResponseEntity.ok(userDetailsService.saveAll(users));
+    public ResponseEntity<?> registerList(@RequestBody MassRegisterWrapper msw) throws Exception {
+        return ResponseEntity.ok(userDetailsService.saveAll(msw.getUsers(), msw.getRole()));
     }
 
     private void authenticate(String username, String password) throws Exception {

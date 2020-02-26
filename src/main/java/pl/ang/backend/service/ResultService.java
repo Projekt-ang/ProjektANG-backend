@@ -20,10 +20,7 @@ public class ResultService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public List<Result> getResultsForRole(Map<String,Object> body) {
-        Integer roleId = (Integer) body.get("roleId");
-        Integer readingVideoTestId = (Integer) body.get("readingVideoTestId");
-        Integer blankInsertTestId = (Integer) body.get("blankInsertTestId");
+    public List<Result> getResultsForRole(Integer roleId, Integer readingVideoTestId, Integer blankInsertTestId) {
         List<Result> results = new ArrayList<>();
         Role role = roleRepository.findById(roleId.longValue()).orElse(null);
         if(role != null){

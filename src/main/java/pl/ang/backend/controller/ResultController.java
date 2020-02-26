@@ -15,8 +15,8 @@ public class ResultController {
     private ResultService resultService;
 
     @RequestMapping(value = "/api/get-role-results", method = RequestMethod.GET)
-    public List<Result> getResultsForRole(@RequestBody Map<String,Object> body) {
-        return resultService.getResultsForRole(body);
+    public List<Result> getResultsForRole(@RequestParam Integer roleId, @RequestParam Integer readingVideoTestId, @RequestParam Integer blankInsertTestId) {
+        return resultService.getResultsForRole(roleId, readingVideoTestId, blankInsertTestId);
     }
 
     @RequestMapping(value = "/api/get-user-results/{id}", method = RequestMethod.GET)

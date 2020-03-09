@@ -15,7 +15,7 @@ public class ResultController {
     private ResultService resultService;
 
     @RequestMapping(value = "/api/get-role-results", method = RequestMethod.GET)
-    public List<Result> getResultsForRole(@RequestParam Integer roleId, @RequestParam Integer readingVideoTestId, @RequestParam Integer blankInsertTestId) {
+    public List<Result> getResultsForRole(@RequestParam Integer roleId, @RequestParam(required = false) Integer readingVideoTestId, @RequestParam(required = false) Integer blankInsertTestId) {
         return resultService.getResultsForRole(roleId, readingVideoTestId, blankInsertTestId);
     }
 
